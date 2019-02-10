@@ -1,11 +1,11 @@
 import React from 'react';
 import {bindActionCreators} from "redux";
-import {doneTask} from "../../store/actions";
+import {doneTask, removeTask} from "../../store/actions";
 import {connect} from "react-redux";
 
-export const TaskList = (props) => {
+const TaskList = (props) => {
 
-    const {tasks, setTaskDone} = props;
+    const {tasks, setTaskDone, setTaskRemove} = props;
 
     return (
         <ul>
@@ -15,7 +15,7 @@ export const TaskList = (props) => {
                     {
                         el.done?"":<button onClick={()=> setTaskDone(index)}>Done</button>
                     }
-                    <button onClick={onRemoveHandler}>Remove</button>
+                    <button onClick={()=>setTaskRemove(index)}>Remove</button>
                 </li>
             ))}
         </ul>
@@ -33,7 +33,8 @@ const onRemoveHandler = () => {
 const mapStateToProps = state => ({...state});
 const mapActionToProps = dispatch =>{
     return {
-        setTaskDone:task=>dispatch(doneTask(task))
+        setTaskDone:task=>dispatch(doneTask(task)),
+        setTaskRemove:task=>dispatch(removeTask(task))
     }
 };
 export default connect(mapStateToProps,mapActionToProps)(TaskList);
