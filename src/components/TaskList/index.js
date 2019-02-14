@@ -1,5 +1,4 @@
 import React from 'react';
-import {bindActionCreators} from "redux";
 import {doneTask, removeTask} from "../../store/actions";
 import {connect} from "react-redux";
 
