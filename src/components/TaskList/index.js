@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
+import {SHOW_ALL_TASKS, SHOW_DONE_TASKS, SHOW_REMOVE_TASKS} from "../../index";
 
 const styles = theme => ({
     root: {
@@ -31,12 +32,22 @@ const styles = theme => ({
 
 const TaskList = (props) => {
 
-    const {modifyTasksReducer:{tasks}, setTaskDone, setTaskRemove,classes} = props;
+    const {modifyTasksReducer:{tasks}, setTaskDone, setTaskRemove,classes,filterTasksReducer} = props;
     console.log(props);
+
+    let tasksToShow = tasks;
+    switch (filterTasksReducer) {
+        case SHOW_DONE_TASKS:
+            tasksToShow = tasks.filter(el => el.done);
+            break;
+        case SHOW_REMOVE_TASKS:
+            tasksToShow = tasks.filter(el => el.remove);
+            break;
+    }
 
     return (
         <Fragment>
-            {tasks.map((el, index) => {
+            {tasksToShow.map((el, index) => {
                 const taskClassName = classes.paper + (el.done?" task-done":"") + (el.remove?" task-remove":"");
                 return (
                     <div className={classes.root} key={index}>
