@@ -1,5 +1,7 @@
 import React, {Fragment} from 'react';
 
+import './style.css';
+
 import {doneTask, removeTask} from "../../store/actions";
 import {connect} from "react-redux";
 
@@ -25,12 +27,6 @@ const styles = theme => ({
     title: {
         textAlign: "left"
     },
-    taskDone:{
-        background: "#4caf50"
-    },
-    taskRemove:{
-        background: "#f44336"
-    }
 });
 
 const TaskList = (props) => {
@@ -40,31 +36,34 @@ const TaskList = (props) => {
 
     return (
         <Fragment>
-            {tasks.map((el, index) => (
-                <div className={classes.root} key={index}>
-                    <Grid container spacing={24} className={classes.container}>
-                        <Grid item xs={10} sm={8} md={6}>
-                            <Paper className={classes.paper}>
-                                <Grid container spacing={24} className={classes.container}>
-                                    <Grid item xs={10}>
-                                        <Typography className={classes.title} component="h2" variant="h4" gutterBottom>
-                                            {el.name}
-                                        </Typography>
+            {tasks.map((el, index) => {
+                const taskClassName = classes.paper + (el.done?" task-done":"") + (el.remove?" task-remove":"");
+                return (
+                    <div className={classes.root} key={index}>
+                        <Grid container spacing={24} className={classes.container}>
+                            <Grid item xs={10} sm={8} md={6}>
+                                <Paper className={taskClassName}>
+                                    <Grid container spacing={24} className={classes.container}>
+                                        <Grid item xs={10}>
+                                            <Typography className={classes.title} component="h2" variant="h4" gutterBottom>
+                                                {el.name}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={2}>
+                                            <IconButton className={classes.button} aria-label="Done" onClick={() => setTaskDone(index)}>
+                                                <DoneIcon />
+                                            </IconButton>
+                                            <IconButton className={classes.button} aria-label="Delete" onClick={() => setTaskRemove(index)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={2}>
-                                        <IconButton className={classes.button} aria-label="Done" onClick={() => setTaskDone(index)}>
-                                            <DoneIcon />
-                                        </IconButton>
-                                        <IconButton className={classes.button} aria-label="Delete" onClick={() => setTaskRemove(index)}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
+                                </Paper>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </div>
-            ))}
+                    </div>
+                )
+            })}
         </Fragment>
     )
 };
