@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 import {createStore} from "redux";
 import {Provider} from 'react-redux';
-import {reducer} from "./store/reducer";
+import reducer from "./store/reducer";
 
 export const ADD_NEW_TASK = "ADD_NEW_TASK";
 export const DONE_TASK = "DONE_TASK";

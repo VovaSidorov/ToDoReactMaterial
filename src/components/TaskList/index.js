@@ -31,7 +31,7 @@ const styles = theme => ({
 
 const TaskList = (props) => {
 
-    const {tasks, setTaskDone, setTaskRemove,classes} = props;
+    const {modifyTasksReducer:{tasks}, setTaskDone, setTaskRemove,classes} = props;
     console.log(props);
 
     return (
