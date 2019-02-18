@@ -61,12 +61,20 @@ const TaskList = (props) => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={2}>
-                                            <IconButton className={classes.button} aria-label="Done" onClick={() => setTaskDone(index)}>
-                                                <DoneIcon />
-                                            </IconButton>
-                                            <IconButton className={classes.button} aria-label="Delete" onClick={() => setTaskRemove(index)}>
-                                                <DeleteIcon />
-                                            </IconButton>
+                                            {
+                                                el.remove?""
+                                                    :
+                                                    (
+                                                        <Fragment>
+                                                            <IconButton className={classes.button} aria-label="Done" onClick={() => setTaskDone(index)}>
+                                                                <DoneIcon />
+                                                            </IconButton>
+                                                            <IconButton className={classes.button} aria-label="Delete" onClick={() => setTaskRemove(index)}>
+                                                                <DeleteIcon />
+                                                            </IconButton>
+                                                        </Fragment>
+                                                    )
+                                            }
                                         </Grid>
                                     </Grid>
                                 </Paper>

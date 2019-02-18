@@ -43,8 +43,8 @@ class TaskFilter extends Component {
                 showRemoveTasksHandler();
                 break;
         }
-
     };
+
     render(){
         const {classes} = this.props;
         return (
